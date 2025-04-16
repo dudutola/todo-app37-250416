@@ -8,3 +8,13 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+
+table {
+  margin-top: 20px;
+}
+
+th, td {
+  padding: 6px 8px;
+  text-align: left;
+}

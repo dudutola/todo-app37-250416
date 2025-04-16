@@ -1,12 +1,21 @@
 <h1>My todo List</h1>
 <%= link_to "New Task", new_task_path %>
 
-<ul>
-  <% @tasks.each do |task| %>
-    <li>
-      <%= task.title %>
-      <%= task.due_date %>
-      <%= task.recurrence %>
-    </li>
-  <% end %>
-</ul>
+<table>
+  <thead>
+    <tr>
+      <th>title</th>
+      <th>date</th>
+      <th>recurrence</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tasks.each do |task| %>
+      <tr>
+        <td><%= task.title %></td>
+        <td><%= task.due_date.strftime("%m/%d") %></td>
+        <td><%= task.recurrence %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

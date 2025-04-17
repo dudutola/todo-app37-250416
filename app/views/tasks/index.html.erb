@@ -25,7 +25,7 @@
   </div>
 
   <dialog id="new-task-dialog">
-    <%= form_with(model: @task, data: { task_target: "form" }) do |f| %>
+    <%= form_with(model: @task) do |f| %>
       <% if @task.errors.any? %>
         <ul>
           <% @task.errors.full_messages.each do |message| %>
@@ -47,33 +47,8 @@
         <%= f.select :recurrence, options_for_select(["None", "Daily", "Every Week", "From Monday to Friday"]) %>
       </div>
 
-      <button value="cancel" formmethod="dialog">Cancel</button>
+      <button value="cancel" formmethod="dialog" data-task-target="click->task#close">Cancel</button>
       <%= f.submit %>
     <% end %>
-    <%# <form action="/tasks" method="post">
-      <div>
-        <label for="task_title">Title</label>
-        <input type="text" name="task[title]" id="task_title" required>
-      </div>
-
-      <div>
-        <label for="task_due_date">Date</label>
-        <input type="date" name="task[due_date]" id="task_due_date" required>
-      </div>
-
-      <div>
-        <label for="task_recurrence">Repeat:</label>
-        <select name="task[recurrence]" id="task_recurrence">
-          <option>None</option>
-          <option>Daily</option>
-          <option>Weekly</option>
-        </select>
-      </div>
-
-      <div>
-        <button value="cancel" formmethod="dialog">Cancel</button>
-        <button type="submit">Create Task</button>
-      </div>
-    </form> %>
   </dialog>
 </div>

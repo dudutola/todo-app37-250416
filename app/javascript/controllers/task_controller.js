@@ -2,15 +2,9 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="task"
 export default class extends Controller {
-  // targets form + due date??
-  static targets = [ "dueDate", "form", "currentDueDate"]
-  connect() {
-    console.log("hee")
-  }
+  static targets = [ "dueDate", "currentDueDate"]
 
   new(e) {
-    console.log("hoo")
-
     e.preventDefault()
     const date = e.currentTarget.dataset.taskDate
 
@@ -20,5 +14,12 @@ export default class extends Controller {
     const currentDate = new Date(date)
     const currentDateFormatted = currentDate.toISOString().slice(0, 16)
     this.currentDueDateTarget.value = currentDateFormatted
+  }
+
+  close(e) {
+    e.preventDefault()
+
+    const dialog = document.getElementById("new-task-dialog");
+    dialog.close()
   }
 }

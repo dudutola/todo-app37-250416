@@ -18,7 +18,9 @@
         <div class="tasks">
           <% @tasks.select { |task|
            (task.recurrence == "Daily" && task.due_date.to_date <= current_date) ||
-           (task.recurrence != "Daily" && task.due_date.to_date == current_date) ||
+           (task.recurrence != "Daily" && task.due_date.to_date == current_date)||
+           (task.recurrence == "Weekly" && task.due_date.to_date <= current_date && current_date.wday == task.due_date.wday) ||
+            # (task.recurrence == "Weekly" && (current_date - task.due_date.to_date).to_i % 7 == 0 && current_date >= task.due_date.to_date) ||
            (task.recurrence == "From Monday to Friday" && current_date >= task.due_date.to_date && (1..5).include?(current_date.wday))
           }.each do |task| %>
             <p class="task"><%= task.title %></p>
@@ -48,7 +50,7 @@
       </div>
       <div>
         <%= f.label :recurrence, "Repeat" %>
-        <%= f.select :recurrence, options_for_select(["None", "Daily", "Every Week", "From Monday to Friday"]) %>
+        <%= f.select :recurrence, options_for_select(["None", "Daily", "Weekly", "From Monday to Friday"]) %>
       </div>
 
       <button value="cancel" formmethod="dialog" data-task-target="click->task#close">Cancel</button>

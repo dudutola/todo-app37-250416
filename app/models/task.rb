@@ -2,7 +2,7 @@ class Task < ApplicationRecord
   validates :title, presence: true
   validates :due_date, presence: true
   validates :recurrence, inclusion: {
-    in: [ "None", "Daily", "Every Week", "From Monday to Friday" ],
+    in: [ "None", "Daily", "Weekly", "From Monday to Friday" ],
     message: "%{value} is not a valid recurrence option"
   }, allow_blank: true
 
@@ -10,7 +10,7 @@ class Task < ApplicationRecord
     case recurrence
     when "Daily"
       due_date + 1.day
-    when "Every Week"
+    when "Weekly"
       due_date + 7.days
     when "From Monday to Friday"
       find_monday_to_friday(due_date)

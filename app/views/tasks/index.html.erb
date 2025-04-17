@@ -1,5 +1,7 @@
-<h1>My todo List</h1>
-<%= link_to "New Task", new_task_path %>
+<div class="main-head">
+  <h1>My todo List</h1>
+  <%= link_to "New Task", new_task_path %>
+</div>
 
 <div class="tasks-container">
   <% 7.times do |day_offset| %>
@@ -7,16 +9,9 @@
     <div class="day">
       <h2><%= current_date == Date.today ? "today" : current_date.strftime("%a").upcase + current_date.day.to_s %></h2>
       <div class="tasks">
-        <%# select all daily tasks %>
-
-        <% @tasks.select { |task| task.recurrence == "Daily"}.each do |task|  %>
+        <% @tasks.select { |task| task.recurrence == "Daily" || task.due_date.to_date == current_date }.each do |task| %>
           <p class="task"><%= task.title %></p>
         <% end %>
-
-        <%# @tasks.select { |task| task.due_date == current_date}.each do |task|  %>
-
-        <%# end %>
-
       </div>
     </div>
   <% end %>

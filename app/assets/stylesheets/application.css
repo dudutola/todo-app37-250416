@@ -10,11 +10,26 @@
  */
 
 
-table {
-  margin-top: 20px;
+h2 {
+  text-align: right;
 }
 
-th, td {
-  padding: 6px 8px;
-  text-align: left;
+.tasks-container {
+  /* display: flex;
+  justify-content: space-between; */
+
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  /* grid-gap: 24px; */
+}
+
+.day {
+  border: 1px solid #ccc;
+  padding: 0 6px;
+}
+
+.task {
+  background-color: #c2fff9;
+  padding: 4px 6px;
+  border-radius: 4px;
 }

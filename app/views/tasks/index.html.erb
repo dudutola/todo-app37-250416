@@ -3,16 +3,77 @@
   <%= link_to "New Task", new_task_path %>
 </div>
 
-<div class="tasks-container">
-  <% 7.times do |day_offset| %>
-    <% current_date = Date.today + day_offset %>
-    <div class="day">
-      <h2><%= current_date == Date.today ? "today" : current_date.strftime("%a").upcase + current_date.day.to_s %></h2>
-      <div class="tasks">
-        <% @tasks.select { |task| task.recurrence == "Daily" || task.due_date.to_date == current_date }.each do |task| %>
-          <p class="task"><%= task.title %></p>
-        <% end %>
+<div data-controller="task">
+  <div class="tasks-container">
+    <% 7.times do |day_offset| %>
+      <% current_date = Date.today + day_offset %>
+      <div class="day"
+           data-action="click->task#new"
+           data-task-date="<%= current_date %>"
+           data-task-target="dueDate"
+      >
+        <h2>
+          <%= current_date == Date.today ? "today" : current_date.strftime("%a").upcase + current_date.day.to_s %>
+        </h2>
+        <div class="tasks">
+          <% @tasks.select { |task| task.recurrence == "Daily" || task.due_date.to_date == current_date }.each do |task| %>
+            <p class="task"><%= task.title %></p>
+          <% end %>
+        </div>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
+
+  <dialog id="new-task-dialog">
+    <%= form_with(model: @task, data: { task_target: "form" }) do |f| %>
+      <% if @task.errors.any? %>
+        <ul>
+          <% @task.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      <% end %>
+
+      <div>
+        <%= f.label :title %>
+        <%= f.text_field :title %>
+      </div>
+      <div>
+        <%= f.label :due_date, "Date" %>
+        <%= f.datetime_local_field :due_date, data: { "task_target" => "currentDueDate" } %>
+      </div>
+      <div>
+        <%= f.label :recurrence, "Repeat" %>
+        <%= f.select :recurrence, options_for_select(["None", "Daily", "Every Week", "From Monday to Friday"]) %>
+      </div>
+
+      <button value="cancel" formmethod="dialog">Cancel</button>
+      <%= f.submit %>
+    <% end %>
+    <%# <form action="/tasks" method="post">
+      <div>
+        <label for="task_title">Title</label>
+        <input type="text" name="task[title]" id="task_title" required>
+      </div>
+
+      <div>
+        <label for="task_due_date">Date</label>
+        <input type="date" name="task[due_date]" id="task_due_date" required>
+      </div>
+
+      <div>
+        <label for="task_recurrence">Repeat:</label>
+        <select name="task[recurrence]" id="task_recurrence">
+          <option>None</option>
+          <option>Daily</option>
+          <option>Weekly</option>
+        </select>
+      </div>
+
+      <div>
+        <button value="cancel" formmethod="dialog">Cancel</button>
+        <button type="submit">Create Task</button>
+      </div>
+    </form> %>
+  </dialog>
 </div>

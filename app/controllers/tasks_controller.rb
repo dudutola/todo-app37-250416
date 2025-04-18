@@ -17,6 +17,16 @@ class TasksController < ApplicationController
     end
   end
 
+  def mark_task_as_completed
+    # find task
+    # update to complete if false
+    # redirection
+    # tasks repeated has the same id???
+    @task = Task.find(params[:id])
+    @task.update(completed: !@task.completed)
+    redirect_to tasks_path
+  end
+
   private
 
   def task_params

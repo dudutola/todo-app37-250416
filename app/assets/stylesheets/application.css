@@ -38,4 +38,32 @@ h2 {
   background-color: #c2fff9;
   padding: 4px 6px;
   border-radius: 4px;
+  cursor: pointer;
+}
+
+.mark_completed {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 16px 0;
+
+  .task {
+    flex: 1;
+    margin: 0;
+    background-color: #b1f9f2;
+  }
+
+  .task:hover {
+    background-color: #9ff0e8;
+  }
+
+  .x-btn {
+    cursor: pointer;
+    border: none;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    color: red;
+  }
 }

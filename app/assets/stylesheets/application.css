@@ -43,6 +43,10 @@ a {
   /* grid-gap: 24px; */
 }
 
+form div {
+  margin-bottom: 12px;
+}
+
 .day {
   border: 1px solid #ccc;
   padding: 0 6px;
@@ -52,7 +56,7 @@ a {
   background-color: #c2fff9;
   padding: 4px 6px;
   border-radius: 4px;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
 .mark_completed {

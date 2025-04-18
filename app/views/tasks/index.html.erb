@@ -22,23 +22,12 @@
            (task.recurrence == "Weekly" && task.due_date.to_date <= current_date && current_date.wday == task.due_date.wday) ||
            (task.recurrence == "From Monday to Friday" && current_date >= task.due_date.to_date && (1..5).include?(current_date.wday))
           }.each do |task| %>
-          <%#
-          updated task to completed
-          task.completed = true
-          if date == today
-            read task.completed
-          if date > today
-            task.completed = false
-            style task differently
-          end
-
-           %>
            <% if current_date > Date.today %>
             <p class="task task_<%= task.id %>"><%= task.title %></p>
-           <% else %>
 
+           <% else %>
             <% if task.completed? %>
-              <p style='color:red;text-decoration:line-through' class="task task_<%= task.id %>"><%= task.title %></p>
+              <p id="completed" class="task task_<%= task.id %>"><%= task.title %></p>
             <% else %>
               <%= form_with(model: task, url: mark_task_as_completed_task_path(task), method: :patch) do |f| %>
                 <%= f.hidden_field "id", value: task.id %>
@@ -48,10 +37,7 @@
                 </div>
               <% end %>
             <% end %>
-
            <% end %>
-
-
           <% end %>
         </div>
       </div>

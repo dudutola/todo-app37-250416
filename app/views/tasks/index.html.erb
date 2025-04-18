@@ -22,22 +22,26 @@
            (task.recurrence == "Weekly" && task.due_date.to_date <= current_date && current_date.wday == task.due_date.wday) ||
            (task.recurrence == "From Monday to Friday" && current_date >= task.due_date.to_date && (1..5).include?(current_date.wday))
           }.each do |task| %>
-           <% if current_date > Date.today %>
-            <p class="task task_<%= task.id %>"><%= task.title %></p>
+            <% if current_date > Date.today %>
+              <p class="task task_<%= task.id %>"><%= task.title %></p>
 
-           <% else %>
-            <% if task.completed? %>
-              <p id="completed" class="task task_<%= task.id %>"><%= task.title %></p>
             <% else %>
-              <%= form_with(model: task, url: mark_task_as_completed_task_path(task), method: :patch) do |f| %>
+              <%= form_with(model: task, url: toggle_completed_task_path(task), method: :patch) do |f| %>
                 <%= f.hidden_field "id", value: task.id %>
-                <div class="mark_completed">
-                  <%= f.submit "x", class: "x-btn" %>
-                  <%= content_tag :p, task.title, class: "task" %>
-                </div>
+                <% if task.completed? %>
+                  <div class="mark_completed">
+                    <%= content_tag :p, task.title, id: "completed", class: "task" %>
+                    <%= f.submit "↩️", class: "x-btn" %>
+                  </div>
+                <% else %>
+                  <div class="mark_completed">
+                    <%= f.submit "✔️", class: "x-btn" %>
+                    <%= content_tag :p, task.title, class: "task" %>
+                  </div>
+                <% end %>
               <% end %>
+
             <% end %>
-           <% end %>
           <% end %>
         </div>
       </div>

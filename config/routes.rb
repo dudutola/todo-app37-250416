@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   resources :tasks do
     member do
-      patch :mark_task_as_completed
+      patch :toggle_completed
     end
   end
   root to: "tasks#index"

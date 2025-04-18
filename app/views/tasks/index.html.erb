@@ -28,19 +28,16 @@
             <% else %>
               <%= form_with(model: task, url: toggle_completed_task_path(task), method: :patch) do |f| %>
                 <%= f.hidden_field "id", value: task.id %>
-                <% if task.completed? %>
-                  <div class="mark_completed">
+                <div class="mark_completed">
+                  <% if task.completed? %>
                     <%= content_tag :p, task.title, id: "completed", class: "task" %>
                     <%= f.submit "↩️", class: "x-btn" %>
-                  </div>
-                <% else %>
-                  <div class="mark_completed">
+                  <% else %>
                     <%= f.submit "✔️", class: "x-btn" %>
                     <%= content_tag :p, task.title, class: "task" %>
-                  </div>
-                <% end %>
+                  <% end %>
+                </div>
               <% end %>
-
             <% end %>
           <% end %>
         </div>

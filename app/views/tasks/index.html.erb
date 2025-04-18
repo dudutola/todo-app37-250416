@@ -17,10 +17,10 @@
         </h2>
         <div class="tasks">
           <% @tasks.select { |task|
-           (task.recurrence == "Daily" && task.due_date.to_date <= current_date) ||
-           (task.recurrence != "Daily" && task.due_date.to_date == current_date)||
-           (task.recurrence == "Weekly" && task.due_date.to_date <= current_date && current_date.wday == task.due_date.wday) ||
-           (task.recurrence == "From Monday to Friday" && current_date >= task.due_date.to_date && (1..5).include?(current_date.wday))
+            (task.due_date.to_date == current_date) ||
+            (task.recurrence == "Daily" && task.due_date.to_date <= current_date) ||
+            (task.recurrence == "Weekly" && task.due_date.to_date <= current_date && current_date.wday == task.due_date.wday) ||
+            (task.recurrence == "From Monday to Friday" && current_date >= task.due_date.to_date && (1..5).include?(current_date.wday))
           }.each do |task| %>
             <% if current_date > Date.today %>
               <p class="task task_<%= task.id %>"><%= task.title %></p>

@@ -20,6 +20,20 @@ h2 {
   text-align: right;
 }
 
+a {
+  text-decoration: none;
+}
+
+.new_task {
+  background-color: #afb2b224;
+  padding: 10px;
+  border-radius: 50%;
+}
+
+.new_task:hover {
+  background-color: #afb2b263;
+}
+
 .tasks-container {
   /* display: flex;
   justify-content: space-between; */

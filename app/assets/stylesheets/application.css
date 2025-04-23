@@ -10,10 +10,20 @@
  */
 
 
+body {
+  height: 110vh;
+  margin: 100px 52px;
+  background-color: black;
+}
+
 .main-head {
   display: flex;
   align-items: center;
   gap: 20px;
+}
+
+h1, h2 {
+  color: white;
 }
 
 h2 {
@@ -25,22 +35,20 @@ a {
 }
 
 .new_task {
-  background-color: #afb2b224;
+  background-color: #afb2b24f;
   padding: 10px;
   border-radius: 50%;
 }
 
 .new_task:hover {
-  background-color: #afb2b263;
+  background-color: white;
 }
 
 .tasks-container {
-  /* display: flex;
-  justify-content: space-between; */
+  margin: 0 26px;
 
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  /* grid-gap: 24px; */
 }
 
 form div {
@@ -50,13 +58,13 @@ form div {
 .day {
   border: 1px solid #ccc;
   padding: 0 6px;
+  background-color: #313131;
 }
 
 .task {
   background-color: #c2fff9;
   padding: 4px 6px;
   border-radius: 4px;
-  /* cursor: pointer; */
 }
 
 .mark_completed {
@@ -79,7 +87,6 @@ form div {
     cursor: pointer;
     border: none;
     font-weight: bold;
-    /* border-radius: 50%; */
     width: 24px;
     height: 24px;
     color: red;

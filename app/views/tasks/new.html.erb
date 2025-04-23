@@ -1,4 +1,4 @@
-<h1>New Task</h1>
+<h1 class="new_title">New Task</h1>
 
 <%= form_with(model: @task) do |f| %>
 
@@ -12,7 +12,7 @@
 
   <div>
     <%= f.label :title %>
-    <%= f.text_field :title %>
+    <%= f.text_field :title, placeholder: "Add a new task..." %>
   </div>
   <div>
     <%= f.label :due_date, "Date" %>
@@ -23,8 +23,10 @@
     <%= f.select :recurrence, options_for_select(["None", "Daily", "Weekly", "From Monday to Friday"]) %>
   </div>
 
-  <%= f.submit %>
+  <div>
+    <%= f.submit %>
+  </div>
 <% end %>
 
 
-<%= link_to "> Back", tasks_path %>
+<%= link_to "> Back", tasks_path, class: "back" %>

@@ -1,0 +1,11 @@
+#new-task-dialog form {
+  label {
+    color: black;
+    font-size: 20px;
+  }
+}
+
+.btn-options {
+  display: flex;
+  gap: 8px;
+}

@@ -57,7 +57,7 @@
 
       <div>
         <%= f.label :title %>
-        <%= f.text_field :title %>
+        <%= f.text_field :title, placeholder: "Add a new task..." %>
       </div>
       <div>
         <%= f.label :due_date, "Date" %>
@@ -68,8 +68,10 @@
         <%= f.select :recurrence, options_for_select(["None", "Daily", "Weekly", "From Monday to Friday"]) %>
       </div>
 
-      <button value="cancel" formmethod="dialog" data-task-target="click->task#close">Cancel</button>
-      <%= f.submit %>
+      <div class="btn-options">
+        <%= f.submit %>
+        <button value="cancel" formmethod="dialog" data-task-target="click->task#close">Cancel</button>
+      </div>
     <% end %>
   </dialog>
 </div>

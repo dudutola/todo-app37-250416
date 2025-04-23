@@ -11,6 +11,7 @@
 
 
 @import "components/new.css";
+@import "components/dialog.css";
 
 body {
   height: 110vh;
